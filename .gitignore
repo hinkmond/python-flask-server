@@ -1,0 +1,12 @@
+.DS_Store
+/build/
+pyscripts/__pycache__/
+
+### IntelliJ IDEA ###
+/.idea/
+*.iws
+*.iml
+*.ipr
+/out/
+
+*.pyc

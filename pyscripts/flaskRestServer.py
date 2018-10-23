@@ -2,7 +2,6 @@ from flask import Flask, request, make_response
 import requests, json
 
 app = Flask(__name__)
-url = 'https://postman-echo.com/post'
 
 @app.route('/helloworld', methods=['GET','POST'])
 def create_row_in_gs():
@@ -13,10 +12,13 @@ def create_row_in_gs():
         param = request.json['param']
 
         helloWorldMessage = "Hello " + str(param) + ", from Flask REST server!"
-        create_row_data = {'passedInData': str(param)}
+
+        url = 'https://postman-echo.com/post'
+        cookieDict = dict(cookieName="ABCDEFXYZ")
+        jsonBody = {'passedInData': str(param)}
 
         response = requests.post(
-            url, data=json.dumps(create_row_data),
+            url, cookies=cookieDict, data=json.dumps(jsonBody),
             headers={'Content-Type': 'application/json'}
         )
         return helloWorldMessage + "\n" + str(response.content)
