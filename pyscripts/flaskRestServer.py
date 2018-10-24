@@ -4,7 +4,7 @@ import requests, json
 app = Flask(__name__)
 
 @app.route('/helloworld', methods=['GET','POST'])
-def create_row_in_gs():
+def showHelloWorldExample():
     if request.method == 'GET':
         return make_response('GET not implemented.')
 
