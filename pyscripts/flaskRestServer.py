@@ -1,9 +1,12 @@
 from flask import Flask, request, make_response
+from flask_cors import cross_origin
 import requests, json
+
 
 app = Flask(__name__)
 
 @app.route('/helloworld', methods=['GET','POST'])
+@cross_origin()  # Make this endpoint able to be called from cross-origins
 def showHelloWorldExample():
     """
     POST endpoint that shows hello world message with data (response) from a nested REST POST
@@ -42,9 +45,9 @@ def showHelloWorldExample():
 
         # Return a combination of the Hello World message with the passed in "param", and the response from
         #   postman-echo.com
-        helloWorldMessage = "Hello " + str(param) + ", from Flask REST server!"
-        return helloWorldMessage + "\n Here is the REST POST response content from postman-echo.com " + \
-               str(response.content)
+        helloWorldMessage = "\nHello " + str(param) + ", from Flask REST server!\n\n"
+        return helloWorldMessage + "Here is the REST POST response content from postman-echo.com:\n===\n" + \
+               str(response.content) + "\n"
 
 if __name__ == '__main__':
     app.run(host='localhost',debug=False, use_reloader=True)
